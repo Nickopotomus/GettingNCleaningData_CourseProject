@@ -1,0 +1,26 @@
+Participant_ID: Participant identification number (1-30)
+
+Activity_ID
+1 - walking
+2 - walking upstairs
+3 - walking downstairs
+4 - sitting
+5 - standing
+6 - laying
+
+Domain - referes to domain used in original calculations (time or frequency)
+Component - identifies motion component being quantified (body motion or gravitational)
+Instrument - identifies accelerometer or gyroscope
+
+
+Variables captured:
+
+1. Acceleration_XYZ - linear/angular acceleration in X/Y/Z direction (as identified)
+2. Acceleration_Magnitude - linear/angular acceleration magnitude
+3. Jerk_XYZ - linear/angular jerk in X/Y/Z direction (as identified)
+4. Jerk_Magnitude - linear/angular jerk magnitude
+
+For all four variable types identified above, script records mean and standard deviation:
+
+1. _Mean - mean
+2. _Std - standard deviation
