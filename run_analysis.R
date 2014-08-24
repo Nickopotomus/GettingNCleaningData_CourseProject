@@ -10,7 +10,8 @@ xTrain <- read.table(unz(temp, "UCI HAR Dataset/train/X_train.txt"))
 subjectTrain <- read.table(unz(temp, "UCI HAR Dataset/train/subject_train.txt"))
 yTrain <- read.table(unz(temp, "UCI HAR Dataset/train/y_train.txt"))
 
-# put together training data.frame
+# 1. Reshape train & test data from "wide" format to "long" format:
+
 TrainTimeBodyAccel <- data.frame("Participant_ID"=as.factor(subjectTrain[,1]),
                                  "Activity_ID"=as.factor(yTrain[,1]),
                                  "Domain"=as.factor(rep("Time",nrow(yTrain))),
@@ -117,6 +118,8 @@ TrainFreqBodyGyro <- data.frame("Participant_ID"=as.factor(subjectTrain[,1]),
                                 "Jerk_Magnitude_Mean"=xTrain[,542],
                                 "Jerk_Magnitude_Std"=xTrain[,543])
 
+# Create train "long" format dataframe
+
 dfTrain <- rbind(TrainTimeBodyAccel,
                  TrainTimeBodyGyro,
                  TrainTimeGravAccel,
@@ -132,6 +135,8 @@ subjectTest <- read.table(unz(temp, "UCI HAR Dataset/test/subject_test.txt"))
 yTest <- read.table(unz(temp, "UCI HAR Dataset/test/y_test.txt"))
 
 unlink(temp)
+
+# 1. Reshape train & test data from "wide" format to "long" format:
 
 TestTimeBodyAccel <- data.frame("Participant_ID"=as.factor(subjectTest[,1]),
                                  "Activity_ID"=as.factor(yTest[,1]),
@@ -239,6 +244,8 @@ TestFreqBodyGyro <- data.frame("Participant_ID"=as.factor(subjectTest[,1]),
                                 "Jerk_Magnitude_Mean"=xTest[,542],
                                 "Jerk_Magnitude_Std"=xTest[,543])
 
+# Create test "long" format dataframe
+
 dfTest <- rbind(TestTimeBodyAccel,
                  TestTimeBodyGyro,
                  TestTimeGravAccel,
@@ -253,6 +260,8 @@ dfTidyData <- rbind(dfTrain,
                     dfTest)
 
 remove(dfTrain,dfTest)
+
+# Create empty data frame for all acceleration/jerk/magnitude means & standard deviations
 
 dfTidyDataAvg <- data.frame(matrix(vector(),0,21,
                                    dimnames=list(c(),
@@ -284,6 +293,8 @@ dataFactors <- list(c("1","2","3","4","5","6","7","8","9","10","11","12","13","1
                     c("Body Motion","Gravitational"),
                     c("Accelerometer","Gyroscope"))
 nrow = 1
+
+# Loop through all combinations of participants, activities, domains, components, and instruments
 
 for(i in 1:30){
   for(j in 1:6){
