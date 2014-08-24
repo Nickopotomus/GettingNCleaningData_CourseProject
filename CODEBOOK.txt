@@ -24,3 +24,21 @@ For all four variable types identified above, script records mean and standard d
 
 1. _Mean - mean
 2. _Std - standard deviation
+
+Variables created:
+
+1. Training dataset
+   a. xTrain - biometric data from X_train.txt
+   b. subjetTrain - participant IDs from subject_train.txt
+   c. yTrain - activity IDs from y_train.txt
+2. training long format (similar for test long format)
+   a. TrainTimeBodyAccel - training set, time domain, body motion, accelerometer
+   b. TrainTimeBodyGyro - training set, time domain, body motion, gyroscope
+   c. TrainTimeGravAccel - training set, time domain, gravitational component, accelerometer
+   d. TrainFreqBodyAccel - training set, frequency domain, body motion, accelerometer
+   e. TrainFreqBodyGyro - training set, frequency domain, gody motion, gyroscope
+   f. dfTrain - complete data frame of training long format (appending 2a -2e)
+3. dfTidyData - complete data frame of training & testing long formats (appending dfTrain & dfTest)
+4. dataFactors - list containing all data factor variations for participants, activities, domains, motion components, and instruments
+5. averages - vector that captures average values of captured variables listed above
+6. dfTidyDataAvg - complete data frame of average values for all captured variables listed above
